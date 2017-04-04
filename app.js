@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const crypto = require('crypto');
 
 // db connection
 const fs = require('fs');
@@ -68,6 +69,10 @@ app.post('/signup', function (req, res) {
   var user_phone = req.body.user_phone;
   var user_email = req.body.user_email;
   var user_birth = req.body.user_birth;
+
+  var shasum = crypto.createHash('sha1'); // shasum은 Hash 클래스의 인스턴스입니다.
+  shasum.update(user_password);
+  user_password = shasum.digest('hex'); // 암호화 완료
 
   // 쿼리 및 쿼리 파라미터
   var sql = "INSERT INTO user VALUES(?, ?, ?, ?, ?, ?)";
