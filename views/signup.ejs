@@ -1,0 +1,132 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title><%= title %></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+  <link href="/css/custom_style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <!-- .container END -->
+  <div class="container col-md-4">
+    <h1>유저 추가</h1>
+    <form action="/signup" method="POST" onsubmit="return chk_pw()">
+      <div class="form-group">
+        <label for="user_id">아이디</label>
+        <div class="row" style="margin: 0">
+          <input id="user_id" class="form-control col-md-8" type="text" name="user_id" required>
+          <button type="button" onclick="return chk_id()" class="btn btn-secondary col-md-4">중복확인</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="user_password">비밀번호</label>
+        <input id="pw" class="form-control" type="password" name="user_password" required>
+      </div>
+      <div class="form-group">
+        <label for="user_password_confirm">비밀번호 확인</label>
+        <input id="pw_cf" class="form-control" type="password" name="user_password_confirm" required>
+      </div>
+      <div class="form-group">
+        <label for="user_name">이름</label>
+        <input class="form-control" type="text" name="user_name" required>
+      </div>
+      <div class="form-group">
+        <label for="user_phone">폰번호</label>
+        <input class="form-control" type="text" name="user_phone">
+      </div>
+      <div class="form-group">
+        <label for="user_email">Email</label>
+        <input class="form-control" type="email" name="user_email">
+      </div>
+      <div class="form-group">
+        <label for="user_birth">생일</label>
+        <input class="form-control" type="date" name="user_birth">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-block btn-primary" type="submit">등록하기</button>
+        <button class="btn btn-block btn-secondary" type="button" onclick="location.href='/'">취소하기</button>
+      </div>
+    </form>
+  </div>
+  <!-- .container END -->
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+  var result = false; // ajax로 return된 데이터를 받는다.
+
+  $('#pw_cf').keyup(function(e) {
+    if($(this).val() != $('#pw').val()) {
+      $(this).addClass('form-control-danger');
+      $(this).parent().addClass('has-danger');
+    } else {
+      $(this).removeClass('form-control-danger');
+      $(this).parent().removeClass('has-danger');
+    }
+  });
+  $('#pw').keyup(function(e) {
+    if($(this).val() != $('#pw_cf').val() && $('#pw_cf').val() != "") {
+      $('#pw_cf').addClass('form-control-danger');
+      $('#pw_cf').parent().addClass('has-danger');
+    } else {
+      $('#pw_cf').removeClass('form-control-danger');
+      $('#pw_cf').parent().removeClass('has-danger');
+    }
+  });
+
+  function chk_pw() {
+    if(!result) {
+      alert('아이디 중복을 확인해 주세요.');
+      return false;
+    }
+    var pw = document.getElementById('pw').value;
+    var pw_cf = document.getElementById('pw_cf').value;
+
+    if(pw != pw_cf) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function chk_id() {
+    var idValue = document.getElementById('user_id').value;
+
+    if(idValue == "") {
+      alert('입력을 확인해 주세요.');
+      return;
+    }
+    var request = $.ajax({
+      url: "./signup/check_id",
+      method: "POST",
+      data: { id : idValue },
+      dataType: "json",
+      success: function(data) {
+        result = data;
+        if(!result){
+          alert('중복된 아이디입니다.');
+          $('#user_id').removeClass('form-control-success');
+          $('#user_id').addClass('form-control-danger');
+          $('#user_id').parent().parent().removeClass('has-success');
+          $('#user_id').parent().parent().addClass('has-danger');
+        }else {
+          alert('사용할 수 있는 아이디입니다.');
+          $('#user_id').removeClass('form-control-danger');
+          $('#user_id').addClass('form-control-success');
+          $('#user_id').parent().parent().removeClass('has-danger');
+          $('#user_id').parent().parent().addClass('has-success');
+        }
+      }
+    });
+
+    request.fail(function( jqXHR, textStatus ) {
+      alert( "Request failed: " + textStatus );
+      result = false;
+    });
+  }
+</script>
+</html>
