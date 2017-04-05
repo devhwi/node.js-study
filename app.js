@@ -31,7 +31,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // 첫 번째 인자는 주소, 두 번째는 로딩할 라우트
 // 메인페이지
 app.get('/', function (req, res) {
-  res.send('Hello Node.js!');
+  res.render('index', {
+    title: 'Home'
+  });
 });
 
 // 유저 등록

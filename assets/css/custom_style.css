@@ -11,6 +11,16 @@
   font-family: 'Jeju Gothic', serif;
 }
 
-button {
-  font-family: 'Jeju Gothic';
+/**
+ * 기본 태그
+ */
+h1 {
+  border-bottom: 0.05em solid #ccc;
+}
+
+/**
+ * Class Selectors
+ */
+.container {
+  margin-top: 1em;
 }

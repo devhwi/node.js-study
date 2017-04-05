@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%=title%></title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <title><%= title %></title>
+  <title>Node.js | <%= title %></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
   <link href="/css/custom_style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+  <!-- FIXED TOP NAVBAR -->
+  <nav class="navbar navbar-toggleable-md navbar-fixed-top navbar-inverse bg-primary">
+    <!-- hidden on mobile -->
+    <a class="navbar-brand hidden-md-down" href="#">Node.js Study</a>
+    <!-- hidden on mobile -->
+    <!-- hidden on non-mobile -->
+    <div class="container hidden-lg-up">
+      <a class="navbar-brand" href="#">Node.js Study</a>
+    </div>
+    <!-- hidden on non-mobile -->
+    <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Signup</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- FIXED TOP NAVBAR END -->
   <%- body %>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
