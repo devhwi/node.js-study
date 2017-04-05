@@ -28,9 +28,15 @@
         <li class="nav-item active">
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
+        <% if (user_id) { %>
         <li class="nav-item">
-          <a class="nav-link" href="/signup">Signup</a>
+          <a class="nav-link" href="/logout">Logout</a>
         </li>
+        <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <% } %>
       </ul>
     </div>
   </nav>

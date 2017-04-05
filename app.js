@@ -34,6 +34,13 @@ app.use(session({
  resave: false,
  saveUninitialized: true
 }));
+// 세션을 모든 곳에서 사용 가능하도록 만든다.
+app.use(function(req, res, next) {
+  res.locals.user_id = req.session.user_id;
+  res.locals.user_name = req.session.user_name
+  next();
+});
+
 
 // 첫 번째 인자는 주소, 두 번째는 로딩할 라우트
 // 메인페이지
@@ -81,7 +88,18 @@ app.post('/login', function (req, res) {
   })
 });
 
-// 유저 등록
+app.get('/logout', function (req, res) {
+  if(req.session.user_id) {
+    req.session.destroy(function (err) {
+      if(err) console.error('err', err);
+      res.redirect('/login');
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
+// 유저 등록 페이지
 app.get('/signup', function (req, res) {
   // view 파일을 불러온다.
   res.render('signup', {
