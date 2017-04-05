@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // 이것은 경로에 따라 어떤 것을 가져올 지를 정하는 부분
 app.use('/', require('./routes/index'));
-app.use('/user', require('./routes/use'));
+app.use('/user', require('./routes/user'));
 
 // 404 에러 핸들러 (Page not found)
 app.use(function(req, res, next) {
