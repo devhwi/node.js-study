@@ -4,6 +4,7 @@ const app = express();
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
+const engine = require('ejs-locals');
 
 // db connection
 const fs = require('fs');
@@ -17,6 +18,8 @@ const conn = mysql.createConnection({
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+
+app.engine('ejs', engine);
 
 app.use(express.static(__dirname + '/assets'));
 
