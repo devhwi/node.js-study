@@ -17,28 +17,18 @@ app.engine('ejs', engine);
 
 // uncomment after placing your favicon in /public
 app.use(logger('dev'));
+// POST로 넘어온 데이터를 처리해준다.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-// POST로 넘어온 데이터를 처리해준다.
-// app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-// views 폴더를 static하게 사용 가능하다.
-
-// 세션 설정
-app.use(session({
- secret: 'hwisession',
- resave: false,
- saveUninitialized: true
-}));
 // 세션을 모든 곳에서 사용 가능하도록 만든다.
 app.use(function(req, res, next) {
   res.locals.user_id = req.session.user_id;
   res.locals.user_name = req.session.user_name
   next();
 });
+// views 폴더를 static하게 사용 가능하다.
+app.use(express.static(path.join(__dirname, 'public')));
 
 // 이것은 경로에 따라 어떤 것을 가져올 지를 정하는 부분
 app.use('/', require('./routes/index'));
