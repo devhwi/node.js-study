@@ -7,7 +7,7 @@
 
   <title>Node.js | <%= title %></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-  <link href="/css/custom_style.css" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/custom_style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <!-- FIXED TOP NAVBAR -->
@@ -16,7 +16,7 @@
     <a class="navbar-brand hidden-md-down" href="#">Node.js Study</a>
     <!-- hidden on mobile -->
     <!-- hidden on non-mobile -->
-    <div class="container hidden-lg-up">
+    <div class="hidden-lg-up" align="center">
       <a class="navbar-brand" href="#">Node.js Study</a>
     </div>
     <!-- hidden on non-mobile -->
@@ -30,11 +30,11 @@
         </li>
         <% if (user_id) { %>
         <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout</a>
+          <a class="nav-link" href="/user/logout">Logout</a>
         </li>
         <% } else { %>
         <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/user/login">Login</a>
         </li>
         <% } %>
       </ul>

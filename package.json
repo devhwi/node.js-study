@@ -4,16 +4,21 @@
   "description": "devhwi's node.js study",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node ./bin/www"
   },
   "author": "devhwi",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "^2.6.3",
     "ejs": "^2.5.6",
     "ejs-locals": "^1.0.2",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
-    "mysql": "^2.13.0"
+    "morgan": "^1.8.1",
+    "mysql": "^2.13.0",
+    "serve-favicon": "^2.4.2"
   }
 }
