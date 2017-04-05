@@ -4,7 +4,7 @@ const db = require('./db');
 const crypto = require('crypto');
 
 // temp
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   res.render('login', {
     title: 'Login'
   });
@@ -49,6 +49,7 @@ router.post('/login', (req, res) => {
   });
 });
 
+// 로그아웃
 router.get('/logout', (req, res) => {
   if(req.session.user_id) {
     req.session.destroy(function (err) {
