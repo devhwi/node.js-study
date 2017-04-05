@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('./db');
 const crypto = require('crypto');
 
-// temp
+// temp route
 router.get('/', (req, res, next) => {
   res.render('login', {
     title: 'Login'
