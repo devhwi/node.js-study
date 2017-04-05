@@ -28,12 +28,57 @@ app.use(express.static(__dirname + '/assets'));
 app.use(bodyParser.urlencoded({ extended: false }));
 // views 폴더를 static하게 사용 가능하다.
 
+// 세션 설정
+app.use(session({
+ secret: 'hwisession',
+ resave: false,
+ saveUninitialized: true
+}));
+
 // 첫 번째 인자는 주소, 두 번째는 로딩할 라우트
 // 메인페이지
 app.get('/', function (req, res) {
+  var sess = req.session;
   res.render('index', {
-    title: 'Home'
+    title: 'Home',
+    user_id: sess.user_id,
+    user_name: sess.user_name
   });
+});
+
+// 로그인
+app.get('/login', function (req, res) {
+  res.render('login', {
+    title: 'Login'
+  })
+});
+
+// 로그인 처리
+app.post('/login', function (req, res) {
+  var id = req.body.user_id;
+  var pw = req.body.user_password;
+
+  // password encryption
+  var shasum = crypto.createHash('sha1'); // shasum은 Hash 클래스의 인스턴스입니다.
+  shasum.update(pw);
+  var encPw = shasum.digest('hex'); // 암호화 완료
+
+  var sql = "SELECT user_name, COUNT(*) AS count FROM user ";
+      sql+= "WHERE user_id = ? AND user_password = ?";
+  var sqlParams = [id, encPw];
+  conn.query(sql, sqlParams, function (err, rows, cols) {
+    if(err) {
+      console.log(err);
+    } else {
+      if(rows[0].count == 1) {
+        req.session.user_id = req.body.user_id;
+        req.session.user_name = rows[0].user_name;
+        res.send('<script>alert("안녕하세요.");location.href="/";</script>');
+      } else {
+        res.send('<script>alert("아이디, 또는 비밀번호를 확인해 주세요.");location.href="/login";</script>');
+      }
+    }
+  })
 });
 
 // 유저 등록
@@ -55,6 +100,7 @@ app.post('/signup/check_id', function (req, res) {
       console.log(err);
     } else {
       if(rows[0].count > 0){
+        req.session
         res.send(false);
       } else {
         res.send(true);
@@ -89,7 +135,7 @@ app.post('/signup', function (req, res) {
       res.status(500).send('Internal Server Error');
     } else {
       // 성공시 메인으로 이동한다.
-      res.redirect('/');
+      res.send('<script>alert("가입 완료!");location.href="/";</script>');
     }
   });
 });
