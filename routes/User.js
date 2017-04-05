@@ -3,6 +3,13 @@ const router = express.Router();
 const db = require('./db');
 const crypto = require('crypto');
 
+// temp
+router.get('/', (req, res) => {
+  res.render('login', {
+    title: 'Login'
+  });
+});
+
 // 회원 가입
 router.get('/signup', (req, res) => {
   res.render('signup', {
