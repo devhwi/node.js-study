@@ -5,7 +5,7 @@
  * 부트스트랩 클래스를 재정의할 수 있다.
  */
 
- @import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
 
 * {
   font-family: 'Jeju Gothic', serif;
@@ -29,4 +29,26 @@ button {
 .title {
   border-bottom: 0.2em solid #ccc;
   margin-bottom: 1em;
+}
+
+.navbar-right {
+  margin-left: auto!important;
+  color: #fff!important;
+  right: 0!important;
+}
+
+.navbar-right > .dropdown-menu {
+  right: 0;
+  margin-top: 0.5em;
+  margin-left:auto;
+  min-width: 350px;
+  max-width:100%;
+}
+
+#userInfo {
+  color: #fff;
+}
+
+#userInfoName {
+  font-weight: bold;
 }
