@@ -54,7 +54,7 @@ router.get('/logout', (req, res) => {
   if(req.session.user_id) {
     req.session.destroy(function (err) {
       if(err) console.error('err', err);
-      res.redirect('/user/login');
+      res.redirect('/');
     });
   } else {
     res.redirect('/');
