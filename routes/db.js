@@ -2,13 +2,13 @@ const mysql = require('mysql');
 const Promise = require('bluebird');
 const fs = require('fs');
 const path = require('path');
-const config = JSON.parse(fs.readFileSync('./dbconfig.json', 'utf8'));
+const config = JSON.parse(fs.readFileSync(path.join(__dirname, '../dbconfig.json'), 'utf8'));
 Promise.promisifyAll(require('mysql/lib/Connection').prototype);
 Promise.promisifyAll(require('mysql/lib/Pool').prototype);
 const using = Promise.using;
 
 const pool = mysql.createPool(
-  JSON.parse(fs.readFileSync(path.join(__dirname, '../dbconfig.json'), 'utf8'))
+  config
 );
 
 function getConnection() {
