@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
   <link href="/stylesheets/custom_style.css" rel="stylesheet" type="text/css">
   <link href="/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 </head>
 <body>
   <!-- FIXED TOP NAVBAR -->
@@ -36,7 +40,7 @@
           <i class="fa fa-user" aria-hidden="true">&nbsp;<span id="userInfoName"><%=user_name%></span></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="userInfo">
-          <a class="dropdown-item" href="#">내정보</a>
+          <a class="dropdown-item" href="/user/myInfo">내정보</a>
           <a class="dropdown-item" href="/user/logout">로그아웃</a>
         </div>
       </ul>
@@ -52,9 +56,6 @@
   <!-- FIXED TOP NAVBAR END -->
   <%- body %>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $('#userInfoMenu').children('a').on('click', function() {
      $(this).siblings('div').slideToggle('normal');
