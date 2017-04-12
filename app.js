@@ -9,6 +9,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 
 const app = express();
+const models = require('./models');
 
 // 뷰 엔진 설정
 app.set('views', path.join(__dirname, '/views'));

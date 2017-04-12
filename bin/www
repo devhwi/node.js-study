@@ -9,6 +9,18 @@ var debug = require('debug')('node-study:server');
 var http = require('http');
 
 /**
+ * Models
+ */
+var models = require('../models');
+
+// sequelize의 싱크 작업을 시작하고 완료되면 설정된 포트를 통해서 통신 가능하도록 한다.
+models.sequelize.sync().then(function () {
+  server.listen(app.get('port'), function() {
+    debug('Express server listening on port ' + server.address().port);
+  });
+});
+
+/**
  * Get port from environment and store in Express.
  */
 
