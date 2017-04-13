@@ -1,9 +1,0 @@
-{
-  "username": "hwi",
-  "password": "!@#$hwi1",
-  "database": "hwi",
-  "host": "210.183.39.51",
-  "port": 3306,
-  "dialect": "mariadb",
-  "pool": { "max": 5, "min": 0, "idle": 10000 }
-}
