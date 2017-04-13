@@ -4,7 +4,7 @@ var fs        = require("fs");
 var path      = require("path");
 var Sequelize = require("sequelize");
 var env       = process.env.NODE_ENV || "development";
-var config    = JSON.parse(fs.readFileSync(path.join(__dirname, '../sequelize.config.json'), 'utf8'));
+var config    = env == "production" ? "" : JSON.parse(fs.readFileSync(path.join(__dirname, '../sequelize.config.json'), 'utf8'));
 var cf = { "username": process.env.DB_USER     || config.username
          , "password": process.env.DB_PASSWORD || config.username
          , "database": process.env.DB_NAME     || config.database

@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const Promise = require('bluebird');
 const fs = require('fs');
 const path = require('path');
-const config = process.env.NODE_ENV || JSON.parse(fs.readFileSync(path.join(__dirname, '../dbconfig.json'), 'utf8'));
+const config = process.env.NODE_ENV == "production" ? "" : JSON.parse(fs.readFileSync(path.join(__dirname, '../dbconfig.json'), 'utf8'));
 Promise.promisifyAll(require('mysql/lib/Connection').prototype);
 Promise.promisifyAll(require('mysql/lib/Pool').prototype);
 const using = Promise.using;
