@@ -31,8 +31,10 @@ app.use(session({
 }));
 // 세션을 모든 곳에서 사용 가능하도록 만든다.
 app.use(function(req, res, next) {
-  res.locals.user_id = req.session.user_id;
-  res.locals.user_name = req.session.user_name
+  // res.locals.user_id = req.session.user_id;
+  // res.locals.user_name = req.session.user_name
+  // 세션변수 자체를 res.locals.user에 담는다. 사용은 <%=user.user_id%> 와 같이 사용한다.
+  res.locals.user = req.session;
   next();
 });
 
