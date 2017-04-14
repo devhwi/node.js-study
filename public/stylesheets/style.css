@@ -1,8 +1,15 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/**
+ * Bootstrap4 재정의를 하는 곳
+ */
+.bg-primary {
+  background-color: #991144!important;
 }
 
-a {
-  color: #00B7FF;
+.btn-primary {
+  background-color: #cc2255;
+  border-color: #991144;
+}
+.btn-primary:hover {
+  background-color: #ff7788;
+  border-color: #ffbbaa;
 }
