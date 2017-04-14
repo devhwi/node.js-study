@@ -9,10 +9,10 @@ const using = Promise.using;
 const db = require('../models');
 
 const pool = mysql.createPool({
-  "host"     : process.env.DB_HOST || config.host,
-  "user"     : process.env.DB_USER || config.user,
+  "host"     : process.env.DB_HOST     || config.host,
+  "user"     : process.env.DB_USER     || config.user,
   "password" : process.env.DB_PASSWORD || config.password,
-  "database" : process.env.DB_NAME || config.database,
+  "database" : process.env.DB_NAME     || config.database,
 });
 
 function getConnection() {
