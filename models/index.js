@@ -18,7 +18,7 @@ var prodConfig = {
 var config    = env == "production" ? prodConfig : JSON.parse(fs.readFileSync(path.join(__dirname, '../sequelize.config.json'), 'utf8'));
 var sequelize = new Sequelize(process.env.DB_NAME     || config.database
                             , process.env.DB_USER     || config.username
-                            , process.env.DB_PASSWORD || config.password, config);
+                            , process.env.DB_PASSWORD || config.password, env == "production" ? prodConfig : config);
 var db        = {};
 
 fs
