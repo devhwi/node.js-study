@@ -4,7 +4,18 @@ var fs        = require("fs");
 var path      = require("path");
 var Sequelize = require("sequelize");
 var env       = process.env.NODE_ENV || "development";
-var config    = env == "production" ? "" : JSON.parse(fs.readFileSync(path.join(__dirname, '../sequelize.config.json'), 'utf8'));
+
+var prodConfig = {
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  dialect: process.env.DB_TYPE,
+  pool: { "max": 5, "min": 0, "idle": 10000 }
+};
+
+var config    = env == "production" ? prodConfig : JSON.parse(fs.readFileSync(path.join(__dirname, '../sequelize.config.json'), 'utf8'));
 var sequelize = new Sequelize(process.env.DB_NAME     || config.database
                             , process.env.DB_USER     || config.username
                             , process.env.DB_PASSWORD || config.password, config);

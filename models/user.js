@@ -12,6 +12,7 @@ module.exports = function(sequelize, DataTypes) {
     , user_phone    : { type : DataTypes.STRING(13), allowNull: true }
     , user_email    : { type : DataTypes.STRING(100), allowNull: true }
     , user_birth    : { type : DataTypes.DATE, allowNull: true }
+    , user_reg_date : { type : DataTypes.DATE }
   }, {
 	  timestamps: false,
 	  tableName: 'user'
