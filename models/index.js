@@ -37,6 +37,8 @@ Object.keys(db).forEach(function(modelName) {
   }
 });
 
+db.user.hasMany(db.attendance, {foreignKey: 'user_id'});
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
