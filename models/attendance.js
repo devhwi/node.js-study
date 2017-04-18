@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     , date       : { type : DataTypes.DATEONLY, primaryKey: true
                  , validate : { isDate: true } }
     , memo       : { type : DataTypes.STRING(2000) }
-    , submit_date: { type: DataTypes.DATE }
+    , submit_date: { type : DataTypes.DATE }
     , file_name  : { type : DataTypes.STRING(100) }
   }, {
 	  timestamps: false,

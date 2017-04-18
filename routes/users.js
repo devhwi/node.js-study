@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('./db');
 const crypto = require('crypto');
 const models = require('../models');
+const moment = require('moment');
 
 // 회원 가입
 router.get('/signup', (req, res) => {
@@ -35,12 +36,12 @@ router.post('/login', (req, res) => {
   var encPw = shasum.digest('hex'); // 암호화 완료
 
   // findOne 특정 컬럼을 가지고 찾는 메서드입니다.
-  models.user.findAndCountAll({ where: {user_id: id
-                              , user_password: encPw} })
+  models.user.findAndCountAll({ where: { id: id
+                                       , pass: encPw} })
   .then(function(user) {
     if(user.count == 1) {
       req.session.user_id = id;
-      req.session.user_name = user.rows[0].user_name;
+      req.session.user_name = user.rows[0].name;
       res.send('<script>alert("안녕하세요.");location.href="/";</script>');
     } else {
       res.send('<script>alert("아이디, 또는 비밀번호를 확인해 주세요.");location.href="/user/login";</script>');
@@ -70,7 +71,7 @@ router.get('/signup', (req, res) => {
 
 // 유저 아이디 중복 확인
 router.post('/signup/check_id', (req, res) => {
-  models.user.findAndCountAll({where : {user_id: req.body.id}})
+  models.user.findAndCountAll({where : {id: req.body.id}})
   .then(function(result) {
     if(result.count > 0) {
       req.session
@@ -96,17 +97,18 @@ router.post('/signup/check_id', (req, res) => {
 // req.body => POST 방식으로 넘어온 파라미터들
 router.post('/signup', (req, res) => {
   // POST 로 넘어온 파라미터들
-  var data = { user_id       : req.body.user_id
-             , user_password : req.body.user_password
-             , user_name     : req.body.user_name
-             , user_phone    : req.body.user_phone
-             , user_email    : req.body.user_email
-             , user_birth    : req.body.user_birth
+  var now  = moment().format('YYYY-MM-DD HH:mm:ss');
+  var data = { id       : req.body.user_id
+             , password : req.body.user_password
+             , name     : req.body.user_name
+             , phone    : req.body.user_phone
+             , email    : req.body.user_email
+             , birth    : req.body.user_birth
              };
 
-  var shasum = crypto.createHash('sha512'); // 암호화 512로 샤샤샤
-      shasum.update(data.user_password);
-      data.user_password = shasum.digest('hex'); // 암호화 완료
+  var shasum = crypto.createHash('sha256'); // 암호화 256로 샤샤샤
+      shasum.update(data.password);
+      data.password = shasum.digest('hex'); // 암호화 완료
 
   models.user.create(data)
   .then(function() {
@@ -120,8 +122,8 @@ router.get('/myInfo', (req, res) => {
     res.send('<script>alert("로그인이 필요합니다.");location.href="/";</script>');
   }
 
-  models.user.findOne({ attributes: ['user_id', 'user_name', 'user_phone', 'user_email', 'user_birth']
-                      , where: { user_id: req.session.user_id } })
+  models.user.findOne({ attributes: ['id', 'name', 'phone', 'email', 'birth']
+                      , where: { id: req.session.user_id } })
   .then((rows) => {
     console.log(rows);
     res.render('myInfo', {
@@ -141,19 +143,19 @@ router.post('/myInfo', (req, res) => {
   if(req.body.user_password !== ""
   && req.body.user_password == req.body.user_password_confirm) {
     user_password = req.body.user_password;
-    var shasum = crypto.createHash('sha512'); // 암호화 512로 샤샤샤
+    var shasum = crypto.createHash('sha256'); // 암호화 256로 샤샤샤
         shasum.update(user_password);
         user_password = shasum.digest('hex'); // 암호화 완료
   }
   // POST 로 넘어온 파라미터들
-  var data = { user_id       : req.body.user_id
-             , user_password : user_password
-             , user_name     : req.body.user_name
-             , user_phone    : req.body.user_phone
-             , user_email    : req.body.user_email
-             , user_birth    : req.body.user_birth
+  var data = { id       : req.body.user_id
+             , password : user_password
+             , name     : req.body.user_name
+             , phone    : req.body.user_phone
+             , email    : req.body.user_email
+             , birth    : req.body.user_birth
              };
-  models.user.update(data, {where: { user_id: data.user_id } })
+  models.user.update(data, {where: { id: data.id } })
   .then(function() {
     res.send('<script>alert("정보가 수정되었습니다.");location.href="/user/myInfo";</script>');
   });

@@ -19,7 +19,8 @@ module.exports = function(sequelize, DataTypes) {
     , birth    : { type : DataTypes.DATEONLY, allowNull: true
                  , validate : { isDate: true } }
     , reg_date : { type : DataTypes.DATEONLY
-                 , validate : { isDate: true } }
+                 , validate : { isDate: true }
+                 , defaultValue : DataTypes.NOW }
     , ip       : { type : DataTypes.STRING(15), allowNull: true
                  , validate : { isIP: true } }
   }, {

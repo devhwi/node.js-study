@@ -41,7 +41,7 @@ db.user.hasMany(db.attendance,
   { foreignKey: 'idx'
   , onDelete: 'cascade'
   , onUpdate: 'cascade'
-  , hooks:true
+  , hooks: true
   }
 );
 
