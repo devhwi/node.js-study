@@ -6,13 +6,22 @@
 */
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('user', {
-      user_id       : { type : DataTypes.STRING(20), primaryKey: true }
-    , user_password : { type : DataTypes.STRING(128) }
-    , user_name     : { type : DataTypes.STRING(30) }
-    , user_phone    : { type : DataTypes.STRING(13), allowNull: true }
-    , user_email    : { type : DataTypes.STRING(100), allowNull: true }
-    , user_birth    : { type : DataTypes.DATEONLY, allowNull: true }
-    , user_reg_date : { type : DataTypes.DATEONLY }
+      idx      : { type : DataTypes.INTEGER(11), primaryKey: true
+                 , autoIncrement: true }
+    , id       : { type : DataTypes.STRING(50)
+                 , validate : { is: ["^[a-z0-9_-]+$",'i'] } }
+    , pass     : { type : DataTypes.STRING(200) }
+    , name     : { type : DataTypes.STRING(50), allowNull: true }
+    , tel      : { type : DataTypes.STRING(20), allowNull: true }
+    , phone    : { type : DataTypes.STRING(20), allowNull: true }
+    , email    : { type : DataTypes.STRING(100), allowNull: true
+                 , validate : { isEmail: true } }
+    , birth    : { type : DataTypes.DATEONLY, allowNull: true
+                 , validate : { isDate: true } }
+    , reg_date : { type : DataTypes.DATEONLY
+                 , validate : { isDate: true } }
+    , ip       : { type : DataTypes.STRING(15), allowNull: true
+                 , validate : { isIP: true } }
   }, {
 	  timestamps: false,
 	  tableName: 'user'

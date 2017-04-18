@@ -6,8 +6,9 @@
 */
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('attendance', {
-      user_id         : { type : DataTypes.STRING(20), primaryKey: true }
-    , attendance_date : { type : DataTypes.DATEONLY, primaryKey: true }
+      date      : { type : DataTypes.DATEONLY, primaryKey: true
+                 , validate : { isDate: true } }
+    , file_name : { type : DataTypes.STRING(100) }
   }, {
 	  timestamps: false,
     tableName: 'attendance'
