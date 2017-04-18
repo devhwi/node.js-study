@@ -37,6 +37,14 @@ Object.keys(db).forEach(function(modelName) {
   }
 });
 
+db.user.hasMany(db.attendance,
+  { foreignKey: 'idx'
+  , onDelete: 'cascade'
+  , onUpdate: 'cascade'
+  , hooks:true
+  }
+);
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
