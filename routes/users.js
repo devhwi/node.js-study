@@ -31,7 +31,7 @@ router.post('/login', (req, res) => {
   var pw = req.body.user_password;
 
   // password encryption
-  var shasum = crypto.createHash('sha512'); // shasum은 Hash 클래스의 인스턴스입니다.
+  var shasum = crypto.createHash('sha256'); // shasum은 Hash 클래스의 인스턴스입니다.
   shasum.update(pw);
   var encPw = shasum.digest('hex'); // 암호화 완료
 
@@ -99,16 +99,16 @@ router.post('/signup', (req, res) => {
   // POST 로 넘어온 파라미터들
   var now  = moment().format('YYYY-MM-DD HH:mm:ss');
   var data = { id       : req.body.user_id
-             , password : req.body.user_password
+             , pass     : req.body.user_password
              , name     : req.body.user_name
              , phone    : req.body.user_phone
              , email    : req.body.user_email
              , birth    : req.body.user_birth
              };
 
-  var shasum = crypto.createHash('sha256'); // 암호화 256로 샤샤샤
-      shasum.update(data.password);
-      data.password = shasum.digest('hex'); // 암호화 완료
+  var shasum = crypto.createHash('sha256'); // 암호화 256으로 샤샤샤
+      shasum.update(data.pass);
+      data.pass = shasum.digest('hex'); // 암호화 완료
 
   models.user.create(data)
   .then(function() {
@@ -143,18 +143,19 @@ router.post('/myInfo', (req, res) => {
   if(req.body.user_password !== ""
   && req.body.user_password == req.body.user_password_confirm) {
     user_password = req.body.user_password;
-    var shasum = crypto.createHash('sha256'); // 암호화 256로 샤샤샤
+    var shasum = crypto.createHash('sha256'); // 암호화 256으로 샤샤샤
         shasum.update(user_password);
         user_password = shasum.digest('hex'); // 암호화 완료
   }
   // POST 로 넘어온 파라미터들
   var data = { id       : req.body.user_id
-             , password : user_password
+             , pass     : user_password
              , name     : req.body.user_name
              , phone    : req.body.user_phone
              , email    : req.body.user_email
              , birth    : req.body.user_birth
              };
+  if(user_password == "") delete data.pass;
   models.user.update(data, {where: { id: data.id } })
   .then(function() {
     res.send('<script>alert("정보가 수정되었습니다.");location.href="/user/myInfo";</script>');
