@@ -113,6 +113,9 @@ router.post('/signup', (req, res) => {
   models.user.create(data)
   .then(function() {
     res.send('<script>alert("가입 완료!");location.href="/";</script>');
+  }).catch(function(err) {
+    res.send('<script>alert("가입 완료!");</script>');
+    console.log(err);
   })
 });
 

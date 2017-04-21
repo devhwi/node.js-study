@@ -1,11 +1,27 @@
 <% layout('layout') -%>
 <div class="container">
   <p>
-    <%=user_name ? '안녕하세요. ' + user_name + '님' : ''%>
-  </p>
-  <p>
     <a href="https://github.com/devhwi/node.js-study" target="_blank">
       <i class="fa fa-github" aria-hidden="true">&nbsp; Go to Github Repository</i>
     </a>
   </p>
+  <p>
+    <%=user_name ? '안녕하세요. ' + user_name + '님' : ''%>
+  </p>
+  <h3>한줄메모</h3>
+  <% if (user_name) { %>
+  <div class="card card-outline-secondary mb-3 text-center">
+    <div class="card-block">
+      로그인 완료! 하지만 한줄메모는 아직 없어요..흑흑<br>
+      그리고 아직 현주님의 컨펌도 안떨어졌답니다...ㅜㅜ
+    </div>
+  </div>
+  <% } else { %>
+  <div class="card card-outline-secondary mb-3 text-center">
+    <div class="card-block">
+      현주님의 개발 컨펌이 필요합니다.<br>
+      그리고 로그인이 필요합니다. 우측 상단에 로그인을 해주세요.
+    </div>
+  </div>
+  <% } %>
 </div>
