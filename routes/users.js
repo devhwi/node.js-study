@@ -114,7 +114,7 @@ router.post('/signup', (req, res) => {
   .then(function() {
     res.send('<script>alert("가입 완료!");location.href="/";</script>');
   }).catch(function(err) {
-    res.send('<script>alert("가입 완료!");</script>');
+    res.send('<script>alert("오류 발생! 관리자에게 문의하여 주세요.");</script>');
     console.log(err);
   })
 });
