@@ -9,13 +9,14 @@ router.get('/', (req, res, next) => {
   var sess = req.session;
   var today = moment().format('YYYY-MM-DD');
   models.user.findAndCountAll({ attributes: ['idx', 'id', 'name', 'phone', 'email', 'birth']
-                      , include: { model: models.attendance
-                                 , attributes: ['idx', 'memo',
-                                                [models.Sequelize.fn('date_format', models.Sequelize.col('submit_date'), '%Y-%m-%d %H:%i:%s'), 'submit_date']]
-                                 , where: {
-                                     date: today
-                                   }
-                      }
+                              , include: { model: models.attendance
+                                         , attributes: ['idx', 'memo',
+                                                        [models.Sequelize.fn('date_format', models.Sequelize.col('submit_date'), '%Y-%m-%d %H:%i:%s'), 'submit_date']]
+                                         , where: {
+                                             date: today
+                                         }
+                                         , order: ['submit_date', 'ASC']
+                              }
   })
   .then((result) => {
     console.log(result.rows);

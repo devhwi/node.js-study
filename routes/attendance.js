@@ -4,7 +4,9 @@ const db = require('./db');
 const models = require('../models');
 const moment = require('moment');
 
-// 출석 등록
+/**
+ * 출석 등록
+ */
 router.post('/write', (req, res) => {
   // session check
   if(!req.session.user_id) {
