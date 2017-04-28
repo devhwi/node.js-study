@@ -12,6 +12,8 @@ var prodConfig = {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   dialect: process.env.DB_TYPE,
+  dialectOptions: { useUTC: false },
+  timezone: "+09:00",
   pool: { "max": 5, "min": 0, "idle": 10000 }
 };
 

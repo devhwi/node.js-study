@@ -7,6 +7,7 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
+const moment = require('moment');
 
 const app = express();
 const models = require('./models');
@@ -41,6 +42,7 @@ app.use(function(req, res, next) {
 // 이것은 경로에 따라 어떤 것을 가져올 지를 정하는 부분
 app.use('/', require('./routes/index'));
 app.use('/user', require('./routes/users'));
+app.use('/attendance', require('./routes/attendance'))
 
 // 404 에러 핸들러 (Page not found)
 app.use(function(req, res, next) {

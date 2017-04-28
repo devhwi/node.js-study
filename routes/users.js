@@ -40,6 +40,7 @@ router.post('/login', (req, res) => {
                                        , pass: encPw} })
   .then(function(user) {
     if(user.count == 1) {
+      req.session.user_idx = user.rows[0].idx;
       req.session.user_id = id;
       req.session.user_name = user.rows[0].name;
       res.send('<script>alert("안녕하세요.");location.href="/";</script>');
