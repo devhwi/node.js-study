@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     , ip       : { type : DataTypes.STRING(15)
                  , validate : { isIP: true } }
   }, {
-	  timestamps: false,
-	  tableName: 'user'
+	    timestamps: false
+	  , tableName: 'user'
   });
 };
