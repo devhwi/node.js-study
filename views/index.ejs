@@ -12,6 +12,35 @@
   font-size: 0.5em;
   background-color: #fff;
 }
+
+.hwi-memo-title {
+
+}
+
+.hwi-memo-cal {
+  text-align: right;
+}
+
+.cal-btn {
+  float: right;
+  height: 100%;
+}
+
+.hwi-cal {
+  width: 50%;
+  float: right;
+}
+
+@media (max-width: 425px) {
+  .hwi-cal {
+    width: 100%;
+    margin-bottom: 0.5em;
+  }
+
+  .cal-btn {
+    display: none;
+  }
+}
 </style>
 
 <div class="container">
@@ -23,7 +52,21 @@
   <p>
     <%=user_name ? '안녕하세요. ' + user_name + '님' : ''%>
   </p>
-  <h3>한줄메모</h3>
+  <div class="row" style="margin-bottom: 0.5em;">
+    <div class="col-md-6 col-xs-12 hwi-memo-title">
+      <h3>한줄메모</h3>
+    </div>
+    <div class="col-md-6 col-xs-12 hwi-memo-cal">
+      <button class="btn btn-primary cal-btn hidden-md-down" type="button" style="margin-left: 2px;">조회</button>
+      <button type="button" class="btn btn-secondary cal-btn" onclick="location.href='/<%=tomorrow%>'">
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </button>
+      <input class="form-control hwi-cal" type="date" value="<%= date %>">
+      <button type="button" class="btn btn-secondary cal-btn" onclick="location.href='/<%=yesterday%>'">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
   <% if (user_name) { %>
   <div class="card card-outline-secondary mb-3 text-center">
     <div class="card-block">
