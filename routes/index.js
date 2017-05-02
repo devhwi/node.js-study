@@ -18,7 +18,7 @@ router.get('/:date?', (req, res, next) => {
   var sess = req.session;
   models.user.findAndCountAll({ attributes: ['idx', 'id', 'name', 'phone', 'email', 'birth']
                               , include: { model: models.attendance
-                                         , attributes: [ 'idx', 'memo',
+                                         , attributes: [ 'idx', 'memo', 'file_name',
                                                          [ models.Sequelize.fn('date_format'
                                                          , models.Sequelize.col('submit_date'), '%Y-%m-%d %H:%i:%s')
                                                          , 'submit_date']

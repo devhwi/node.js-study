@@ -31,6 +31,11 @@
   float: right;
 }
 
+.card-img {
+  width: 150px;
+  height: 150px;
+}
+
 @media (max-width: 425px) {
   .hwi-cal {
     width: 100%;
@@ -97,7 +102,14 @@
           <%= memo.name %>&nbsp;(<%= memo.id %>)
         </div>
         <div class="card-block">
-          <p class="card-text"><%= memo['attendances'][0]['memo'] %></p>
+          <div class="row">
+            <p class="card-text col-md-8">
+              <%= memo['attendances'][0]['memo'] %>
+            </p>
+            <p class="col-md-4">
+              <img class="card-img" src="<%= memo['attendances'][0]['file_name'] || 'http://lorempixel.com/150/150' %>" alt="">
+            </p>
+          </div>
         </div>
         <div class="card-footer text-muted hwi-card-footer">
           <%= memo['attendances'][0]['submit_date'] %> 에 작성
