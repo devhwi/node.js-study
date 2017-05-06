@@ -5,7 +5,7 @@ const models = require('../models');
 const moment = require('moment');
 const imgur = require('imgur')
 const fs = require('fs');
-const imgurConfig = require('../imgur.config.json');
+const imgurConfig = fs.existsSync('../imgur.config.json') ? require('../imgur.config.json') : '';
 
 // imgur setting
 imgur.setClientId(process.env.IMGUR_CLIENTID || imgurConfig.clientId);
