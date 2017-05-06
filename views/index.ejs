@@ -84,9 +84,10 @@
       <div class="card card-outline-danger text-center write-area">
         <div class="card-block">
           <blockquote class="card-blockquote">
-            <form method="post" action="/attendance/write">
+            <form method="post" action="/attendance">
               <div class="form-group">
-                <textarea class="form-control" name="memo" id="memo" rows="3"></textarea>
+                <textarea class="form-control" name="memo" id="memo" rows="3" required></textarea>
+                <input class="form-control upload" type="file" name="file_name" id="file_name" accept="image/x-png,image/gif,image/jpeg" value="Select Image">
               </div>
               <div class="form-group" style="margin-bottom: 0px; text-align: right">
                 <button type="submit" class="btn btn-primary">출석하기</button>

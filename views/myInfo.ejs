@@ -19,7 +19,7 @@
     </div>
     <div class="form-group">
       <label for="user_name">이름</label>
-      <input id="user_name" class="form-control" type="text" name="user_name" required>
+      <input id="user_name" class="form-control" type="text" name="user_name" required value="<%=info.name%>">
     </div>
     <div class="form-group">
       <label for="user_phone">폰번호</label>
@@ -46,7 +46,7 @@ var row =<%-JSON.stringify(info)%>;
 $('#datePicker').val(today);
 $('#user_id').val(row.id);
 $('#user_id_hidden').val(row.id);
-$('#user_name').val(row.name);
+// $('#user_name').val(row.name);
 $('#user_phone').val(row.phone);
 $('#user_email').val(row.email);
 // birth
