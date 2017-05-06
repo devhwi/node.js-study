@@ -8,6 +8,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const moment = require('moment');
+const multer = require('multer');
 
 const app = express();
 const models = require('./models');

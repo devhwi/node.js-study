@@ -87,7 +87,9 @@
             <form method="post" action="/attendance">
               <div class="form-group">
                 <textarea class="form-control" name="memo" id="memo" rows="3" required></textarea>
-                <input class="form-control upload" type="file" name="file_name" id="file_name" accept="image/x-png,image/gif,image/jpeg" value="Select Image">
+                <input class="form-control upload" type="file" name="file_name" id="file_name" accept="image/x-png,image/gif,image/jpeg" value="Select Image"
+                  onchange="handleFileSelect()">
+                <input type="hidden" name="upload_file" id="upload_file">
               </div>
               <div class="form-group" style="margin-bottom: 0px; text-align: right">
                 <button type="submit" class="btn btn-primary">출석하기</button>
@@ -140,3 +142,23 @@
   </div>
   <% } %>
 </div>
+
+<script type="text/javascript">
+/* 업로드된 파일을 base64로 인코딩한다. */
+function handleFileSelect(){
+  var files = $('input[name=file_name]')[0].files; //[object FileList]
+  var file = files[0];                             //[object File]
+
+  if(files && file){
+    var reader = new FileReader();
+    reader.onload = function(readerEvt){
+      console.log(readerEvt); //[object ProgressEvent]
+      var binaryString = readerEvt.target.result;
+      document.getElementById("upload_file").value = btoa(binaryString);
+    }
+
+    reader.readAsBinaryString(file); //여기서 reader.onload 실행.
+    console.log(document.getElementById("upload_file").value);
+  }
+}
+</script>
