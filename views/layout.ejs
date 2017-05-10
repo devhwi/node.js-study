@@ -34,6 +34,11 @@
         <li class="nav-item active">
           <a class="nav-link" href="/">홈 <span class="sr-only">(current)</span></a>
         </li>
+        <% if (user.user_id) { %>
+          <li class="nav-item active">
+            <a class="nav-link" href="/chat/now">대화하기</a>
+          </li>
+        <% } %>
       </ul>
       <% if (user.user_id) { %>
       <ul id="userInfoMenu" class="navbar-nav navbar-right dropdown">
