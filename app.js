@@ -41,9 +41,10 @@ app.use(function(req, res, next) {
 });
 
 // 이것은 경로에 따라 어떤 것을 가져올 지를 정하는 부분
-app.use('/', require('./routes/index'));
-app.use('/user', require('./routes/users'));
-app.use('/attendance', require('./routes/attendance'))
+app.use('/'          , require('./routes/index'));
+app.use('/user'      , require('./routes/users'));
+app.use('/attendance', require('./routes/attendance'));
+app.use('/chat'      , require('./routes/chat'));
 
 // 404 에러 핸들러 (Page not found)
 app.use(function(req, res, next) {
